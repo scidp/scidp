@@ -1,14 +1,19 @@
-import { ReactElement } from 'react';
+import {
+  ReactElement,
+  Component,
+  FunctionComponent,
+  CSSProperties,
+} from 'react';
 
 // 积木编辑器props
 export interface JimuEditorProps {
-  Stage: ReactElement;
-  controls: IControls[];
+  canvas?: Component | FunctionComponent;
+  controls?: IControls[];
 }
 
 // 控件类型
 export interface IControls {
-  Entity?: ReactElement;
+  Entity?: Component | FunctionComponent;
   options: IControlsOptions;
 }
 export interface IControlsOptions {
@@ -37,10 +42,16 @@ export interface IWrappedWidget {
   events: IEvent[];
 }
 export interface IWidget {
-  Editor: ReactElement;
-  Layer: ReactElement;
-  Stele: ReactElement;
+  Editor: Component | FunctionComponent;
+  Layer: Component | FunctionComponent;
+  Stele: Component | FunctionComponent;
   meta: IMeta;
+}
+export interface WrappedWidget {
+  type: string;
+  style: CSSStyleRule;
+  id: string;
+  widget: IWidget;
 }
 export interface IMeta {
   script: string;
@@ -68,4 +79,15 @@ export interface IEvent {
   event?: string;
   des: string;
   pub?: string;
+}
+
+// 产出JSON格式
+export interface IPage {
+  attr: IPageAttr;
+  widgetList: IWidget[];
+}
+export interface IPageAttr {
+  style: CSSProperties;
+  name: string;
+  id: string;
 }

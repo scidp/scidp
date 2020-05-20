@@ -1,7 +1,7 @@
 const { distPath, theme } = require('./config');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+
 module.exports = {
   output: {
     path: distPath,
@@ -56,12 +56,5 @@ module.exports = {
   externals: {
     swiper: 'Swiper',
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      hash: false,
-      template: path.join(__dirname, '../src/index.html'),
-      filename: 'index.html',
-    }),
-  ],
+  plugins: [new CleanWebpackPlugin()],
 };

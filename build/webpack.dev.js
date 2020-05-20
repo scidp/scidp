@@ -2,18 +2,19 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const { host, port } = require('./config');
 const webpackBaseConfig = require('./webpack.base.js');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const { distPath } = require('./config');
 
 module.exports = merge(webpackBaseConfig, {
   mode: 'development',
   entry: [
     `webpack-dev-server/client?http://${host}:${port}`,
     'webpack/hot/only-dev-server',
-    `../src/index.ts`,
+    path.join(__dirname, `../fixtures/index.tsx`),
   ],
   devtool: 'inline-source-map',
-  module: {
-    rules: [].concat(getStyle(true)),
-  },
+  module: {},
   output: {
     publicPath: '/',
     filename: 'assets/[hash:8].[name].js',
@@ -22,6 +23,11 @@ module.exports = merge(webpackBaseConfig, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({}),
+    new HtmlWebpackPlugin({
+      hash: false,
+      template: path.join(__dirname, '../fixtures/index.html'),
+      filename: 'index.html',
+    }),
   ],
   devServer: {
     host,
