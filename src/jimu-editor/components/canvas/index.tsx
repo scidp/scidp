@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Canvas() {
+function Canvas({ stageStore }) {
   return <div>canvas</div>;
 }
 

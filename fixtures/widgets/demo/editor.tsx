@@ -1,6 +1,22 @@
-import React from 'react';
-function Editor() {
-  return <div>demo editor</div>;
-}
+import React, { Component, ComponentType } from 'react';
+import { WidgetEditorProps } from '@shared/interfaces';
+const Editor: ComponentType<WidgetEditorProps> = function Editor({
+  target,
+  changeTargetProps,
+}: WidgetEditorProps) {
+  return (
+    <div>
+      <p> demo editor</p>
+      <p>num: {target.id}</p>
+      <button
+        onClick={() => {
+          changeTargetProps({ backgroundColor: target.style.backgroundColor==='red'?'blue':'red' });
+        }}
+      >
+        change color
+      </button>
+    </div>
+  );
+};
 
 export default Editor;

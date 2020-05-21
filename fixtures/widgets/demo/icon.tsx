@@ -1,6 +1,9 @@
 import React from 'react';
-function Icon() {
-  return <div>demo icon</div>;
+function Icon({ addSelf }) {
+  const handleClick = () => {
+    addSelf();
+  };
+  return <button onClick={handleClick}>demo icon</button>;
 }
 
 export default Icon;

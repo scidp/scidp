@@ -1,21 +1,23 @@
 import React, { ComponentType } from 'react';
 import { observer } from 'mobx-react';
 import { useStore } from '../../hooks/use-store';
-
+import styles from './index.less';
 import Canvas from '../canvas';
 import EditorHost from '../editor-host';
 import ExtendedConcrols from '../extended-controls';
 import IconHost from '../icon-host';
 
 function Stage() {
-  const { scopeStore } = useStore();
+  const { scopeStore, stageStore } = useStore();
   const { canvas } = scopeStore;
   const handleClick = () => {};
-  const CumCanvas: ComponentType = canvas ? canvas : Canvas;
+  const CumCanvas = canvas ? canvas : Canvas;
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} className={styles.stage}>
       <IconHost></IconHost>
-      <CumCanvas></CumCanvas>
+      <div className={styles.canvas_wrapper}>
+        <CumCanvas stageStore={stageStore}></CumCanvas>
+      </div>
       <ExtendedConcrols></ExtendedConcrols>
       <EditorHost></EditorHost>
     </div>

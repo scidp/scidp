@@ -15,9 +15,11 @@ export class ScopeStore {
   changeControls(controls: IControls[]) {
     this.controls = controls;
   }
+  @action
   changeCanvas(canvas: ComponentType) {
     this.canvas = canvas;
   }
+  @action
   changeWidgets(widgets: IWidget[]) {
     this.widgets = widgets;
   }

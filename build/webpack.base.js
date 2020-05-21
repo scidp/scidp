@@ -2,6 +2,9 @@ const { distPath, theme } = require('./config');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
+function resolve(p) {
+  return path.join(__dirname, p);
+}
 module.exports = {
   output: {
     path: distPath,
@@ -23,14 +26,12 @@ module.exports = {
         test: /\.(css|less)$/,
         use: [
           { loader: 'style-loader', options: {} },
-          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { modules: true, sourceMap: true } },
           { loader: 'postcss-loader', options: { sourceMap: true } },
           {
             loader: 'less-loader',
             options: {
               sourceMap: true,
-              javascriptEnabled: true,
-              modifyVars: theme,
             },
           },
         ],
@@ -50,8 +51,13 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
-    alias: {},
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.less'],
+    alias: {
+      '@': resolve('../src'),
+      '@shared': resolve('../src/jimu-editor/shared'),
+      '@hooks': resolve('../src/jimu-editor/hooks'),
+      '@hoc': resolve('../src/jimu-editor/hoc'),
+    },
   },
   externals: {
     swiper: 'Swiper',

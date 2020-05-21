@@ -12,10 +12,10 @@ function App({ canvas, widgets }: JimuEditorProps) {
     scopeStore.changeWidgets(widgets);
   }, []);
   return (
-    <div>
+    <>
       <Header></Header>
       <Stage></Stage>
-    </div>
+    </>
   );
 }
 

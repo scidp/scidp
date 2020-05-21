@@ -14,9 +14,16 @@
     "resolveJsonModule": true,
     "declaration": true,
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@hoc/*": ["src/jimu-editor/hoc/*"],
+      "@hooks/*": ["src/jimu-editor/hooks/*"],
+      "@shared/*": ["src/jimu-editor/shared/*"],
+      "@/*": ["src/*"]
+    },
     "outDir": "dist",
     "jsx": "react",
-    "allowJs": true
-  }
+    "allowJs": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  },
+  "exclude": ["node_modules"]
 }
