@@ -1,8 +1,8 @@
 import React from 'react';
-import { useStores } from '../hooks/use-store';
+import { useStore } from '../hooks/use-store';
 import { observer } from 'mobx-react';
 function Header() {
-  const { scopeStore } = useStores();
+  const { scopeStore } = useStore();
   return <div>Header</div>;
 }
 

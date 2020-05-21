@@ -1,17 +1,22 @@
-import React, { FC } from 'react';
+import React, { useEffect } from 'react';
 
+import { useStore } from './hooks/use-store';
 import { JimuEditorProps } from './shared/interfaces';
 import Stage from './components/stage';
 import Header from './components/header';
 
-import { StoreProvider } from './store';
-function JimuEditor({ canvas, controls }: JimuEditorProps) {
+function App({ canvas, widgets }: JimuEditorProps) {
+  const { scopeStore } = useStore();
+  useEffect(() => {
+    scopeStore.changeCanvas(canvas);
+    scopeStore.changeWidgets(widgets);
+  }, []);
   return (
-    <StoreProvider>
+    <div>
       <Header></Header>
       <Stage></Stage>
-    </StoreProvider>
+    </div>
   );
 }
 
-export default JimuEditor;
+export default App;

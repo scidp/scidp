@@ -1,19 +1,20 @@
 import {
-  ReactElement,
   Component,
   FunctionComponent,
   CSSProperties,
+  ComponentType,
 } from 'react';
 
 // 积木编辑器props
 export interface JimuEditorProps {
-  canvas?: Component | FunctionComponent;
+  canvas?: ComponentType;
   controls?: IControls[];
+  widgets?: IWidget[];
 }
 
 // 控件类型
 export interface IControls {
-  Entity?: Component | FunctionComponent;
+  entity?: Component | FunctionComponent;
   options: IControlsOptions;
 }
 export interface IControlsOptions {
@@ -42,9 +43,9 @@ export interface IWrappedWidget {
   events: IEvent[];
 }
 export interface IWidget {
-  Editor: Component | FunctionComponent;
-  Layer: Component | FunctionComponent;
-  Stele: Component | FunctionComponent;
+  editor: Component | FunctionComponent;
+  layer: Component | FunctionComponent;
+  icon: ComponentType;
   meta: IMeta;
 }
 export interface WrappedWidget {
@@ -65,10 +66,10 @@ export interface WidgetData {
   type: WidgetDataTypes;
   value: string;
 }
-interface WidgetDataTypes {
-  Text: 'TEXT';
-  Image: 'IMAGE';
-  Video: 'VIDEO';
+export enum WidgetDataTypes {
+  Text = 'TEXT',
+  Image = 'IMAGE',
+  Video = 'VIDEO',
 }
 export interface IAction {
   action?: string;

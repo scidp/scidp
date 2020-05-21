@@ -1,0 +1,9 @@
+import { WidgetDataTypes } from '../../../src/jimu-editor';
+export default {
+  version: '0.0.1',
+  deps: ['loadsh@1.1'],
+  script: '',
+  data: {
+    bg: { type: WidgetDataTypes.Text, value: '' },
+  },
+};
