@@ -4,26 +4,20 @@ import React from 'react';
 import { useStore } from '@hooks/use-store';
 import { observer } from 'mobx-react';
 
+import withCardItem from '@hoc/card';
+import { uuidGen } from '@utils/uuid';
 import styles from './index.less';
 
-let id = 0;
 function IconHost() {
   const { scopeStore, stageStore } = useStore();
   const { widgets } = scopeStore;
+
   return (
     <div className={styles.icon_host}>
-      {widgets.map((widget, i) => (
-        <widget.icon
-          key={i}
-          addSelf={() => {
-            stageStore.addWidget({
-              id: id++,
-              style:{},
-              widget: widget,
-            });
-          }}
-        ></widget.icon>
-      ))}
+      {widgets.map((widget, i) => {
+        const WrappedCard = withCardItem(widget, 'demo');
+        return <WrappedCard key={i}></WrappedCard>;
+      })}
     </div>
   );
 }

@@ -26,7 +26,15 @@ module.exports = {
         test: /\.(css|less)$/,
         use: [
           { loader: 'style-loader', options: {} },
-          { loader: 'css-loader', options: { modules: true, sourceMap: true } },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              },
+              sourceMap: true,
+            },
+          },
           { loader: 'postcss-loader', options: { sourceMap: true } },
           {
             loader: 'less-loader',
@@ -57,6 +65,8 @@ module.exports = {
       '@shared': resolve('../src/jimu-editor/shared'),
       '@hooks': resolve('../src/jimu-editor/hooks'),
       '@hoc': resolve('../src/jimu-editor/hoc'),
+      '@config': resolve('../src/jimu-editor/config'),
+      '@utils': resolve('../src/jimu-editor/utils'),
     },
   },
   externals: {

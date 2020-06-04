@@ -1,9 +1,4 @@
-import {
-  CSSProperties,
-  ComponentType,
-  ReactElement,
-  ComponentProps,
-} from 'react';
+import { CSSProperties, ComponentType } from 'react';
 
 // 积木编辑器props
 export interface JimuEditorProps {
@@ -12,7 +7,7 @@ export interface JimuEditorProps {
   widgets?: IWidget[];
 }
 interface ICanvasProps {
-  stageStore:object;
+  stageStore: object;
 }
 // 控件类型
 export interface IControls {
@@ -30,19 +25,8 @@ export enum IControlsTypes {
 }
 
 // 组件物料类型
-export interface IWrappedWidget {
-  id: string;
-  style: CSSProperties;
-  actionAttrs: {
-    actionHide: IAction;
-    actionShow: IAction;
-    [propName: string]: IAction;
-  };
-  actions: IAction[];
-  eventAttrs: {
-    [propName: string]: IEvent;
-  };
-  events: IEvent[];
+export interface IWrappedWidget extends IWidgetAttrs {
+  widget: IWidget;
 }
 export interface IWidget {
   editor: ComponentType<WidgetEditorProps>;
@@ -50,11 +34,19 @@ export interface IWidget {
   icon: ComponentType<WidgetIconProps>;
   meta: IMeta;
 }
-export interface WrappedWidget {
-  type: string;
-  style: CSSProperties;
+export interface IWidgetAttrs {
   id: string;
-  widget: IWidget;
+  style: CSSProperties;
+  actionAttrs?: {
+    actionHide: IAction;
+    actionShow: IAction;
+    [propName: string]: IAction;
+  };
+  actions?: IAction[];
+  eventAttrs?: {
+    [propName: string]: IEvent;
+  };
+  events?: IEvent[];
 }
 export interface IMeta {
   script: string;
@@ -84,11 +76,11 @@ export interface IEvent {
   pub?: string;
 }
 export interface WidgetEditorProps {
-  target: WrappedWidget;
-  changeTargetProps: (style:CSSProperties) => void;
+  target: IWrappedWidget;
+  changeTargetProps: (style: CSSProperties) => void;
 }
 interface WidgetIconProps {
-  addSelf: () => void;
+  addSelf: (attrs: IWidgetAttrs) => void;
 }
 interface WidgetLayerProps {
   setFocus: () => void;
@@ -97,7 +89,7 @@ interface WidgetLayerProps {
 // 产出JSON格式
 export interface IPage {
   attr: IPageAttr;
-  widgetList: WrappedWidget[];
+  widgetList: IWrappedWidget[];
 }
 export interface IPageAttr {
   style: CSSProperties;

@@ -1,4 +1,5 @@
-// 编辑器扩展和外部参数管理
+// 编辑器扩展和外部参数
+// 物料市场配置
 import { observable, action, computed } from 'mobx';
 import { ComponentType, Component } from 'react';
 import { IControls, IWidget } from '../shared/interfaces';

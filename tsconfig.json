@@ -15,9 +15,11 @@
     "declaration": true,
     "baseUrl": ".",
     "paths": {
+      "@config": ["src/jimu-editor/config"],
       "@hoc/*": ["src/jimu-editor/hoc/*"],
       "@hooks/*": ["src/jimu-editor/hooks/*"],
       "@shared/*": ["src/jimu-editor/shared/*"],
+      "@utils/*": ["src/jimu-editor/utils/*"],
       "@/*": ["src/*"]
     },
     "outDir": "dist",
