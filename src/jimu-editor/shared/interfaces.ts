@@ -36,6 +36,7 @@ export interface IWidget {
 }
 export interface IWidgetAttrs {
   id: string;
+  name?: string;
   style: CSSProperties;
   actionAttrs?: {
     actionHide: IAction;
@@ -75,9 +76,12 @@ export interface IEvent {
   des: string;
   pub?: string;
 }
+export interface ChangedObj {
+  [key: string]: any;
+}
 export interface WidgetEditorProps {
   target: IWrappedWidget;
-  changeTargetProps: (style: CSSProperties) => void;
+  changeTargetProps: (obj: ChangedObj) => void;
 }
 interface WidgetIconProps {
   addSelf: (attrs: IWidgetAttrs) => void;
@@ -88,6 +92,8 @@ interface WidgetLayerProps {
 
 // 产出JSON格式
 export interface IPage {
+  id: string;
+  name: string;
   attr: IPageAttr;
   widgetList: IWrappedWidget[];
 }
@@ -95,4 +101,8 @@ export interface IPageAttr {
   style: CSSProperties;
   name: string;
   id: string;
+  layout: IPageLayoutTypes;
+}
+export enum IPageLayoutTypes {
+  Absolute = 'ABSOLUTE',
 }

@@ -1,21 +1,19 @@
 import React from 'react';
 import { toJS } from 'mobx';
-
+import withLayer from '@hoc/layer';
+import styles from './index.less';
 /*
  * todo
  * 和数据流解耦
  */
 function Canvas({ stageStore }) {
   return (
-    <div>
+    <div className={styles.extend_canvas}>
       <p>extended Canvas</p>
-      {stageStore.data.widgetList.map((wrappedWidget) => (
-        <wrappedWidget.widget.layer
-          key={wrappedWidget.id}
-          setFocus={() => stageStore.setFocus(wrappedWidget.id)}
-          style={toJS(wrappedWidget.style)}
-        ></wrappedWidget.widget.layer>
-      ))}
+      {stageStore.targetPage.widgetList.map((wrappedWidget) => {
+        const WrappedLayer = withLayer(wrappedWidget);
+        return <WrappedLayer key={wrappedWidget.id}></WrappedLayer>;
+      })}
     </div>
   );
 }

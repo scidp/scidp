@@ -11,8 +11,28 @@ function Stage() {
   const { scopeStore, stageStore } = useStore();
   const { canvas } = scopeStore;
   const handleClick = () => {};
+  function handleMouseMove(e) {
+    e.preventDefault();
+    typeof window.__widgetMouseMove__ === 'function' &&
+      window.__widgetMouseMove__(e.clientX, e.clientY);
+    typeof window.__widgetResizerMouseMove__ === 'function' &&
+      window.__widgetResizerMouseMove__(e);
+  }
+  function handleMouseUp(e) {
+    if (typeof window.__widgetMouseUp__ === 'function') {
+      window.__widgetMouseUp__(e.clientX, e.clientY);
+    } else if (typeof window.__widgetResizerMouseMUp__ === 'function') {
+      window.__widgetResizerMouseMUp__(e);
+    } else {
+    }
+  }
   return (
-    <div onClick={handleClick} className={styles.stage}>
+    <div
+      onClick={handleClick}
+      className={styles.stage}
+      onMouseMoveCapture={handleMouseMove}
+      onMouseUp={handleMouseUp}
+    >
       <CardHost></CardHost>
       <CanvasHost></CanvasHost>
       <ExtendedConcrols></ExtendedConcrols>

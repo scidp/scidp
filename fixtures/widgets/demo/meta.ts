@@ -6,4 +6,5 @@ export default {
   data: {
     bg: { type: WidgetDataTypes.Text, value: '' },
   },
+  style: { width: '100px', height: '100px' },
 };

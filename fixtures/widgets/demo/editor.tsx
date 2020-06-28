@@ -10,7 +10,10 @@ const Editor: ComponentType<WidgetEditorProps> = function Editor({
       <p>num: {target.id}</p>
       <button
         onClick={() => {
-          changeTargetProps({ backgroundColor: target.style.backgroundColor==='red'?'blue':'red' });
+          changeTargetProps({
+            'style.backgroundColor':
+              target.style.backgroundColor === 'red' ? 'blue' : 'red',
+          });
         }}
       >
         change color

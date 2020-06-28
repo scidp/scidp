@@ -7,10 +7,10 @@ import { CanvasWrapperUniqueId } from '@config';
 import { IWidget } from '@shared/interfaces';
 function withCardItem(
   Widget: IWidget,
-  type,
+  type: string,
   defaultAttrs = { style: { width: '100px' } }
 ) {
-  function wrapped() {
+  function wrapper() {
     const { scopeStore, stageStore } = useStore();
     const [collectedProps, drag] = useDrag({
       item: { id: '', type },
@@ -85,6 +85,7 @@ function withCardItem(
             id,
             ...defaultAttrs,
             ...attrs,
+            ...Widget.meta,
             widget: Widget,
           });
         }
@@ -98,6 +99,7 @@ function withCardItem(
               id: uuidGen(),
               ...defaultAttrs,
               ...attrs,
+              ...Widget.meta,
               widget: Widget,
             });
           }}
@@ -106,7 +108,7 @@ function withCardItem(
     );
   }
 
-  return wrapped;
+  return wrapper;
 }
 
 export default withCardItem;
